@@ -1,0 +1,54 @@
+services:
+  php:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: sistema_livros_php
+    restart: always
+    ports:
+      - "8080:80"
+    volumes:
+      - ./src:/var/www/html
+    depends_on:
+      - mysql
+    networks:
+      - sistema_livros_net
+
+  mysql:
+    image: mysql:8.0
+    container_name: sistema_livros_mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root123
+      MYSQL_DATABASE: sistema_livros
+      MYSQL_USER: livros_user
+      MYSQL_PASSWORD: livros_pass
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./sql:/docker-entrypoint-initdb.d
+    networks:
+      - sistema_livros_net
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: sistema_livros_phpmyadmin
+    restart: always
+    environment:
+      PMA_HOST: mysql
+      PMA_USER: root
+      PMA_PASSWORD: root123
+    ports:
+      - "8082:80"
+    depends_on:
+      - mysql
+    networks:
+      - sistema_livros_net
+
+volumes:
+  mysql_data:
+
+networks:
+  sistema_livros_net:
+    driver: bridge
