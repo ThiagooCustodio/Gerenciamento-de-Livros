@@ -8,8 +8,8 @@ if (!isset($_SESSION['usuario_id'])) {
 
 require_once '../config/conexao.php';
 
-$pdo    = conectar();
-$stmt   = $pdo->query('SELECT * FROM generos ORDER BY genero ASC');
+$pdo     = conectar();
+$stmt    = $pdo->query('SELECT * FROM generos ORDER BY genero ASC');
 $generos = $stmt->fetchAll();
 ?>
 
@@ -25,7 +25,7 @@ $generos = $stmt->fetchAll();
 
 <header class="site-header">
     <div class="container">
-        <a href="../index.php" class="logo"> Sistema de Livros</a>
+        <a href="../index.php" class="logo">📚 Sistema de Livros</a>
         <nav>
             <a href="../index.php">Início</a>
             <a href="listar.php">Gêneros</a>
@@ -38,6 +38,10 @@ $generos = $stmt->fetchAll();
 <main>
     <?php if (isset($_GET['sucesso'])): ?>
         <div class="alerta alerta-sucesso"><?= htmlspecialchars($_GET['sucesso']) ?></div>
+    <?php endif; ?>
+
+    <?php if (isset($_GET['erro'])): ?>
+        <div class="alerta alerta-erro"><?= htmlspecialchars($_GET['erro']) ?></div>
     <?php endif; ?>
 
     <div class="secao-header">
