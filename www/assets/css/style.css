@@ -1,0 +1,354 @@
+/* ========================================
+   RESET E BASE
+======================================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f0f2f5;
+    color: #333;
+    font-size: 16px;
+}
+
+a {
+    color: #2c5f8a;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* ========================================
+   LAYOUT GERAL
+======================================== */
+.container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* ========================================
+   HEADER
+======================================== */
+.site-header {
+    background: #1a2e42;
+    color: white;
+    padding: 16px 0;
+}
+
+.site-header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.site-header .logo {
+    color: white;
+    font-size: 1.3rem;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.site-header nav a {
+    color: #ccd9e3;
+    margin-left: 24px;
+    font-size: 0.95rem;
+    text-decoration: none;
+}
+
+.site-header nav a:hover {
+    color: white;
+}
+
+.site-header nav a.ativo {
+    color: white;
+    font-weight: bold;
+    border-bottom: 2px solid #4a9fd4;
+    padding-bottom: 2px;
+}
+
+/* ========================================
+   MAIN
+======================================== */
+main {
+    padding: 32px 20px;
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+/* ========================================
+   LOGIN
+======================================== */
+.pagina-login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #1a2e42;
+}
+
+.login-box {
+    background: white;
+    padding: 40px;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 380px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+.login-box h1 {
+    font-size: 1.4rem;
+    color: #1a2e42;
+    margin-bottom: 6px;
+    text-align: center;
+}
+
+.login-box h2 {
+    font-size: 0.95rem;
+    color: #777;
+    font-weight: normal;
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+/* ========================================
+   FORMULÁRIOS
+======================================== */
+.campo {
+    margin-bottom: 18px;
+}
+
+.campo label {
+    display: block;
+    font-size: 0.88rem;
+    font-weight: bold;
+    color: #444;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.campo input,
+.campo select,
+.campo textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 0.97rem;
+    color: #333;
+    background: #fafafa;
+    transition: border-color 0.2s;
+}
+
+.campo input:focus,
+.campo select:focus {
+    outline: none;
+    border-color: #2c5f8a;
+    background: white;
+}
+
+.campo-radio {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 4px;
+}
+
+.campo-radio label {
+    font-weight: normal;
+    text-transform: none;
+    letter-spacing: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+/* ========================================
+   BOTÕES
+======================================== */
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.95rem;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s;
+}
+
+.btn-primario {
+    background: #2c5f8a;
+    color: white;
+}
+
+.btn-primario:hover {
+    background: #1a4a70;
+    text-decoration: none;
+    color: white;
+}
+
+.btn-sucesso {
+    background: #2e7d4f;
+    color: white;
+}
+
+.btn-sucesso:hover {
+    background: #1f5c39;
+    text-decoration: none;
+    color: white;
+}
+
+.btn-perigo {
+    background: #b03a2e;
+    color: white;
+}
+
+.btn-perigo:hover {
+    background: #922b21;
+    text-decoration: none;
+    color: white;
+}
+
+.btn-secundario {
+    background: #6c7a89;
+    color: white;
+}
+
+.btn-secundario:hover {
+    background: #55606b;
+    text-decoration: none;
+    color: white;
+}
+
+.btn-block {
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+/* ========================================
+   ALERTAS
+======================================== */
+.alerta {
+    padding: 12px 16px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    font-size: 0.95rem;
+}
+
+.alerta-erro {
+    background: #fdecea;
+    color: #922b21;
+    border-left: 4px solid #b03a2e;
+}
+
+.alerta-sucesso {
+    background: #eaf5ee;
+    color: #1f5c39;
+    border-left: 4px solid #2e7d4f;
+}
+
+/* ========================================
+   TABELAS
+======================================== */
+.tabela-listagem {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.08);
+}
+
+.tabela-listagem th {
+    background: #1a2e42;
+    color: white;
+    padding: 12px 16px;
+    text-align: left;
+    font-size: 0.88rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.tabela-listagem td {
+    padding: 12px 16px;
+    border-bottom: 1px solid #eee;
+    font-size: 0.95rem;
+}
+
+.tabela-listagem tr:last-child td {
+    border-bottom: none;
+}
+
+.tabela-listagem tr:hover td {
+    background: #f5f8fb;
+}
+
+/* ========================================
+   CABEÇALHO DE SEÇÃO
+======================================== */
+.secao-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.secao-header h2 {
+    font-size: 1.3rem;
+    color: #1a2e42;
+}
+
+/* ========================================
+   CARDS DO PAINEL
+======================================== */
+.cards-painel {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 24px;
+}
+
+.card {
+    background: white;
+    border-radius: 8px;
+    padding: 28px 24px;
+    text-align: center;
+    text-decoration: none;
+    color: #333;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.08);
+    flex: 1;
+    min-width: 180px;
+    border-top: 4px solid #2c5f8a;
+    transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    text-decoration: none;
+}
+
+.card-icone { font-size: 2.2rem; display: block; margin-bottom: 10px; }
+.card-numero { font-size: 2rem; font-weight: bold; color: #2c5f8a; display: block; }
+.card-label { font-size: 0.9rem; color: #666; display: block; margin-top: 4px; }
+
+/* ========================================
+   FOOTER
+======================================== */
+.site-footer {
+    background: #1a2e42;
+    color: #6c8499;
+    text-align: center;
+    padding: 16px 0;
+    font-size: 0.85rem;
+    margin-top: 40px;
+}

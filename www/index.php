@@ -1,32 +1,65 @@
 <?php
 session_start();
 
-// Redireciona para login se não estiver logado
 if (!isset($_SESSION['usuario_id'])) {
     header('Location: login.php');
     exit;
 }
+
+require_once 'config/conexao.php';
+
+$pdo = conectar();
+$total_livros  = $pdo->query('SELECT COUNT(*) FROM livros')->fetchColumn();
+$total_generos = $pdo->query('SELECT COUNT(*) FROM generos')->fetchColumn();
 ?>
 
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Início</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Início — Sistema de Livros</title>
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
 
-<h1>Bem-vindo, <?= htmlspecialchars($_SESSION['usuario_nome']) ?>!</h1>
+<header class="site-header">
+    <div class="container">
+        <a href="index.php" class="logo"> Sistema de Livros</a>
+        <nav>
+            <a href="index.php">Início</a>
+            <a href="generos/listar.php">Gêneros</a>
+            <a href="livros/listar.php">Livros</a>
+            <a href="logout.php">Sair</a>
+        </nav>
+    </div>
+</header>
 
-<nav>
-    <a href="generos/listar.php">Gerenciar Gêneros</a> |
-    <a href="livros/listar.php">Gerenciar Livros</a> |
-    <a href="logout.php">Sair</a>
-</nav>
+<main>
+    <div class="secao-header">
+        <h2>Bem-vindo, <?= htmlspecialchars($_SESSION['usuario_nome']) ?>!</h2>
+    </div>
 
-<hr>
+    <div class="cards-painel">
+        <a href="generos/listar.php" class="card">
+            <span class="card-icone">🏷️</span>
+            <span class="card-numero"><?= $total_generos ?></span>
+            <span class="card-label">Gêneros cadastrados</span>
+        </a>
 
-<p>Selecione uma opção no menu acima para começar.</p>
+        <a href="livros/listar.php" class="card">
+            <span class="card-icone">📖</span>
+            <span class="card-numero"><?= $total_livros ?></span>
+            <span class="card-label">Livros cadastrados</span>
+        </a>
+    </div>
+</main>
+
+<footer class="site-footer">
+    <div class="container">
+        <p>Sistema de Gerenciamento de Livros &copy; <?= date('Y') ?></p>
+    </div>
+</footer>
 
 </body>
 </html>
