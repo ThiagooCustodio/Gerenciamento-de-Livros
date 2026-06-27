@@ -70,6 +70,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <button type="submit" class="btn btn-primario btn-block">Entrar</button>
     </form>
+    <p style="text-align:center; margin-top: 20px; font-size: 0.9rem; color: #666;">
+        Não tem uma conta? <a href="criar_usuario.php">Criar conta</a>
+    </p>
+    
 </div>
 
 </body>

@@ -8,13 +8,33 @@ if (!isset($_SESSION['usuario_id'])) {
 
 require_once '../config/conexao.php';
 
-$pdo  = conectar();
-$stmt = $pdo->query('
-    SELECT livros.*, generos.genero AS nome_genero
-    FROM livros
-    INNER JOIN generos ON livros.genero_id = generos.id
-    ORDER BY livros.titulo ASC
-');
+$pdo = conectar();
+
+// Captura o termo de busca da URL
+$busca = trim($_GET['busca'] ?? '');
+
+if ($busca !== '') {
+    // Busca por título, autor ou gênero
+    $stmt = $pdo->prepare('
+        SELECT livros.*, generos.genero AS nome_genero
+        FROM livros
+        INNER JOIN generos ON livros.genero_id = generos.id
+        WHERE livros.titulo LIKE ?
+           OR livros.autor LIKE ?
+           OR generos.genero LIKE ?
+        ORDER BY livros.titulo ASC
+    ');
+    $termo = '%' . $busca . '%';
+    $stmt->execute([$termo, $termo, $termo]);
+} else {
+    $stmt = $pdo->query('
+        SELECT livros.*, generos.genero AS nome_genero
+        FROM livros
+        INNER JOIN generos ON livros.genero_id = generos.id
+        ORDER BY livros.titulo ASC
+    ');
+}
+
 $livros = $stmt->fetchAll();
 ?>
 
@@ -54,9 +74,22 @@ $livros = $stmt->fetchAll();
         <a href="cadastrar.php" class="btn btn-sucesso">+ Novo Livro</a>
     </div>
 
+    <!-- Campo de busca -->
+    <form method="GET" action="listar.php" class="form-busca">
+        <input type="text" name="busca" placeholder="Buscar por título, autor ou gênero..."
+               value="<?= htmlspecialchars($busca) ?>">
+        <button type="submit" class="btn btn-primario">Buscar</button>
+        <?php if ($busca !== ''): ?>
+            <a href="listar.php" class="btn btn-secundario">Limpar</a>
+        <?php endif; ?>
+    </form>
+
     <?php if (empty($livros)): ?>
-        <p>Nenhum livro cadastrado ainda.</p>
+        <p>Nenhum livro encontrado<?= $busca !== '' ? ' para "' . htmlspecialchars($busca) . '"' : '' ?>.</p>
     <?php else: ?>
+        <?php if ($busca !== ''): ?>
+            <p class="resultado-busca"><?= count($livros) ?> resultado(s) para "<?= htmlspecialchars($busca) ?>"</p>
+        <?php endif; ?>
         <table class="tabela-listagem">
             <thead>
                 <tr>

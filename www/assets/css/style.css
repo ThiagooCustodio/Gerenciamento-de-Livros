@@ -352,3 +352,34 @@ main {
     font-size: 0.85rem;
     margin-top: 40px;
 }
+
+/* ========================================
+   BUSCA
+======================================== */
+.form-busca {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.form-busca input {
+    flex: 1;
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 0.97rem;
+    background: #fafafa;
+    transition: border-color 0.2s;
+}
+
+.form-busca input:focus {
+    outline: none;
+    border-color: #2c5f8a;
+    background: white;
+}
+
+.resultado-busca {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 12px;
+}

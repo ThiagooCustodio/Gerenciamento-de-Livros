@@ -2,7 +2,6 @@
 session_start();
 require_once 'config/conexao.php';
 
-$sucesso = '';
 $erro = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -26,8 +25,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $hash = password_hash($senha, PASSWORD_DEFAULT);
             $stmt = $pdo->prepare('INSERT INTO usuario (nome, email, senha) VALUES (?, ?, ?)');
             $stmt->execute([$nome, $email, $hash]);
-
-            // Redireciona após cadastro — evita reenvio ao recarregar
             header('Location: login.php?cadastro=1');
             exit;
         }
@@ -39,38 +36,52 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Criar Usuário</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar Usuário — Sistema de Livros</title>
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
 
-<h1>Criar Usuário</h1>
+<div class="pagina-login">
+    <div class="login-box">
 
-<?php if (isset($_GET['sucesso'])): ?>
-    <p style="color:green">Usuário criado com sucesso!</p>
-<?php endif; ?>
+        <h1>Sistema de Livros</h1>
+        <h2>Criar nova conta</h2>
 
-<?php if ($erro): ?>
-    <p style="color:red"><?= htmlspecialchars($erro) ?></p>
-<?php endif; ?>
+        <?php if ($erro): ?>
+            <div class="alerta alerta-erro"><?= htmlspecialchars($erro) ?></div>
+        <?php endif; ?>
 
-<form method="POST" action="criar_usuario.php">
-    <label>Nome:<br>
-        <input type="text" name="nome" value="<?= htmlspecialchars($_POST['nome'] ?? '') ?>" required>
-    </label><br><br>
+        <form method="POST" action="criar_usuario.php">
+            <div class="campo">
+                <label for="nome">Nome</label>
+                <input type="text" id="nome" name="nome"
+                       value="<?= htmlspecialchars($_POST['nome'] ?? '') ?>"
+                       required autofocus>
+            </div>
 
-    <label>E-mail:<br>
-        <input type="email" name="email" value="<?= htmlspecialchars($_POST['email'] ?? '') ?>" required>
-    </label><br><br>
+            <div class="campo">
+                <label for="email">E-mail</label>
+                <input type="email" id="email" name="email"
+                       value="<?= htmlspecialchars($_POST['email'] ?? '') ?>"
+                       required>
+            </div>
 
-    <label>Senha:<br>
-        <input type="password" name="senha" required>
-    </label><br><br>
+            <div class="campo">
+                <label for="senha">Senha</label>
+                <input type="password" id="senha" name="senha"
+                       minlength="5" required>
+            </div>
 
-    <button type="submit">Criar usuário</button>
-</form>
+            <button type="submit" class="btn btn-sucesso btn-block">Criar conta</button>
+        </form>
 
-<br>
-<a href="login.php">Ir para o login</a>
+        <p style="text-align:center; margin-top: 20px; font-size: 0.9rem; color: #666;">
+            Já tem uma conta? <a href="login.php">Fazer login</a>
+        </p>
+
+    </div>
+</div>
 
 </body>
 </html>
